@@ -6,24 +6,11 @@ module calculadora(
 );
 
   always @(*) begin
-
-    if(codigo == 3'b000) begin
-      assign saida = 8'b00000000; // No operation)
-    end
-
-    if(codigo == 3'b001) begin
-      assign saida = entrada_A; // No operation)
-    end
-
-    if(codigo == 3'b010) begin
-      assign saida = entrada_B; // No operation)
-    end
-
-    if(codigo == 3'b011) begin
-      assign saida = entrada_A + entrada_B; // No operation)
-    end
-
-    if(codigo == 3'b100) begin
-      assign saida = entrada_A - entrada_B; // No operation)
-    end end
+    assign saida = (codigo == 3'b000) ? 8'b00000000 : // zerar
+                   (codigo == 3'b001) ? entrada_A :   // mostrar_A
+                   (codigo == 3'b010) ? entrada_B :   // mostrar_B
+                   (codigo == 3'b011) ? entrada_A + entrada_B : // somar
+                   (codigo == 3'b100) ? entrada_A - entrada_B : // subtrair
+                   8'b00000000; // operação inválida (zerar)
+  end
 endmodule
